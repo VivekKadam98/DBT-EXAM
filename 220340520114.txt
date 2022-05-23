@@ -1,0 +1,84 @@
+create table DEPT
+(DEPTNO INT(2),
+DNAME VARCHAR(15),
+LOC VARCHAR(15)
+);
+
+insert into DEPT(DEPTNO,DNAME,LOC)
+values (10,'ACCOUNTING','NEWYORK'),
+(20,'RESEARCH','DALLAS'),
+(30,'SALES','CHICAGO'),
+(40,'OPERATIONS','BOSTON');
+
+
+
+
+create table EMP
+(EMPNO	int(4),
+ENAME varchar(10),
+JOB	varchar(9),
+HIREDATE date,
+SAL	float(7,2),
+COMM float(7,2),
+DEPTNO int(2)
+);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,HIREDATE,SAL,COMM,DEPTNO)
+VALUES( 7839,'KING','MANAGER','1991-11-17',5000,NULL,10),
+(7698,'BLAKE','CLERK','1981-05-01',2850,NULL,30),
+(7782,'CLARK','MANAGER','1981-06-09',2450,NULL,10),
+(7566,'JONES','CLERK','1981-04-02',2975,NULL,20),
+(7654,'MARTIN','SALESMAN','1981-09-28',1250,1400,30),
+(7499,'ALLEN','SALESMAN','1981-02-20',1600,300,30);
+
+SELECT * FROM EMP;
+
+ SELECT SAL FROM EMP 
+   WHERE SAL BETWEEN 2500 AND  5000;
+
+ SELECT * FROM emp
+   ORDER BY ENAME DESC;
+ 
+SELECT LOWER(JOB) FROM EMP;
+
+UPDATE EMP
+SET JOB = LOWER(JOB);
+ 
+SELECT ENAME, LENGTH('ENAME') "LENGTH OF ENAMES"
+FROM EMO;
+ 
+ SELECT DEPTNO,
+ COUNT(*) 
+    FROM EMP
+    GROUP BY DEPTNO;
+	
+ SELECT D.DNAME,E.ENAME
+ FROM EMP, DEPT 
+ WHERE EMP.DEPTNO=DEPT.DEPTNO;
+ 
+ SELECT POSITION('ar' in ename) from emp;
+ 
+SELECT ENAME, SAL*0.2 AS HRA FROM EMP;
+     
+	 
+	 /*=============SECTION 2===============*/
+create table temp(output varchar(20));
+delimiter //
+create procedure PROC1(x varchar(20), y varchar(20))
+begin
+     if instr(x,y)>0 or instr(y,x) then
+     insert into temp values('Exist');
+     else
+     insert into temp values('Not Exist');
+     end if;
+end; //
+delimiter ;
+
+call PROC1('DAC', 'CDAC');
+select*from temp;     
+
+
+
+
+
+
